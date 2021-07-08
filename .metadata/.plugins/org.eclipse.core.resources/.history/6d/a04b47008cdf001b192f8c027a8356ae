@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>MapTest013.html</title>
+
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a76949096713e82c75fa45bdb32ebb4c"></script>
+
+<script type="text/javascript">
+
+   function initialize()
+   {
+      container = document.getElementById("map");
+      options =
+      {
+         center: new kakao.maps.LatLng(37.556583, 126.919521)
+         , level: 3
+      }
+      
+      // 마커 속성 구성
+      imageSrc = "markerImages/markerimg.png";	//--마커 이미지 주소(또는 웹 상의 주소)
+      imageSize = new kakao.maps.Size(54, 59);	//--마커 이미지 크기
+      imageOption = {offset: new kakao.maps.Point(27, 69)};
+      //--마커의 좌표와 일치시킬 이미지 안에서의 좌표 설정
+      
+      // 위에서 구성한 마커 속성을 활용하여 마커 이미지 생성
+      markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
+      
+      // 마커 생성
+      marker = new kakao.maps.Marker(
+      {
+    	 position: mapCenter
+    	 , image: markerImage 		// 마커 이미지 설정
+      });
+      
+      // 지도에 마커를 표시
+      marker.setMap(map);
+   }
+   
+   // 마커 제거 함수
+   function removeMarker()
+   {
+      // 지도위의 마커 제거
+      marker.setMap(null);
+   }
+   
+   // 마커 다시 생성
+   /* function createMarker()
+   {
+      // 마커가 지도에 표시되도록 설정
+      marker.setMap(map);
+   }
+   */
+   
+   function createMarker()
+   {
+      // 마커가 표시될 위치(홍대입구역 1번 출구 피자몰 → 37.55644826859829, 126.92253463515655)
+      markerPosition = new kakao.maps.LatLng(37.55644826859829, 126.92253463515655);
+      
+      // 마커 생성
+      marker = new kakao.maps.Marker(
+      {
+         position: markerPosition
+      });
+      
+      // 마커가 지도에 표시되도록 설정
+      marker.setMap(map);
+   }
+   
+</script>
+
+</head>
+<body onload="initialize()">
+
+<div>
+   <h1>Kakao Map 고정 마커 생성</h1>
+   <hr>
+</div>
+
+<!-- 지도를 그릴 div 공간 확보(지정) -->
+<div id="map" style="width: 100%; height: 350px;"></div>
+
+<p>
+   <button type="button" onclick="removeMarker()">마커 제거</button>
+   <button type="button" onclick="createMarker()">마커 다시 생성</button>
+</p>
+
+</body>
+</html>
